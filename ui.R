@@ -17,20 +17,13 @@ shinyUI(fluidPage(
               
               numericInput("lambda", label = "Lambda", value = 1),
 
-              helpText("Choose the initialization method:"),
+              helpText("Choose the initialization method. Please note that the program will run a while for random initialization. In this case, cmds is called 40 times in order to find a good cmds embedding."),
 
               selectInput("init", label = "Initialization Method", choices = list("average" = "average", "smacof" = "smacof", "random" = "random"), selected = "average"),
               
               helpText("Choose weighting method:"),
               
-              checkboxInput("convex", label = "Convex Weighting", value = FALSE),
-
-              br(),
-              hr(),
-
-              helpText("Choose the weight for which you want to plot the embedding:"),
-
-              sliderInput("alpha", "Economic weight:", min = 0, max = 1, value = 0)
+              checkboxInput("convex", label = "Convex Weighting", value = FALSE)
               ),
             
             mainPanel(

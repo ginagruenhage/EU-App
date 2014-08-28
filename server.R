@@ -29,14 +29,6 @@ shinyServer(function(input, output) {
     return(embed)
     })
 
-  limits <- reactive({
-    compute.limits(embed())
-    })
-
-  alpha <- reactive({
-    compute.alpha(input$bins,input$alpha)
-  })
-
   output$plot <- renderGvis({
     gvisMotionChart(subset(embed(),select = c("iso","time","cmds.x1","cmds.x2")), idvar = "iso", timevar = "time", xvar = "cmds.x1", yvar = "cmds.x2", options = list(showSidePanel = FALSE))
   })

@@ -1,0 +1,306 @@
+{
+ "info": [
+ {
+ "country": "Austria",
+"iso": "AUT",
+"IncomePerCapita":  36686,
+"CO2.pt": 8.1788,
+"Patents.pt": 2.4443,
+"LifeExpectancyAtBirth":  80.51,
+"UrbanPop.pc": 0.67047,
+"TotalFertilityRate":  1.385 
+},
+{
+ "country": "Belgium",
+"iso": "BEL",
+"IncomePerCapita":  33514,
+"CO2.pt":   9.89,
+"Patents.pt": 1.9604,
+"LifeExpectancyAtBirth": 79.777,
+"UrbanPop.pc": 0.98381,
+"TotalFertilityRate":    1.8 
+},
+{
+ "country": "Bulgaria",
+"iso": "BGR",
+"IncomePerCapita":  11427,
+"CO2.pt": 6.6901,
+"Patents.pt": 0.04953,
+"LifeExpectancyAtBirth": 73.317,
+"UrbanPop.pc": 0.71888,
+"TotalFertilityRate":   1.46 
+},
+{
+ "country": "Cyprus",
+"iso": "CYP",
+"IncomePerCapita":  26333,
+"CO2.pt": 7.9427,
+"Patents.pt": 4.0223,
+"LifeExpectancyAtBirth": 79.058,
+"UrbanPop.pc": 0.69964,
+"TotalFertilityRate":   1.49 
+},
+{
+ "country": "Czech Republic",
+"iso": "CZE",
+"IncomePerCapita":  23295,
+"CO2.pt": 11.269,
+"Patents.pt": 0.17394,
+"LifeExpectancyAtBirth":  77.26,
+"UrbanPop.pc": 0.73891,
+"TotalFertilityRate":   1.41 
+},
+{
+ "country": "Denmark",
+"iso": "DNK",
+"IncomePerCapita":  34629,
+"CO2.pt": 8.5215,
+"Patents.pt": 2.9958,
+"LifeExpectancyAtBirth": 78.408,
+"UrbanPop.pc": 0.86361,
+"TotalFertilityRate": 1.8923 
+},
+{
+ "country": "Estonia",
+"iso": "EST",
+"IncomePerCapita":  19079,
+"CO2.pt": 13.695,
+"Patents.pt": 0.26674,
+"LifeExpectancyAtBirth":  73.23,
+"UrbanPop.pc": 0.69371,
+"TotalFertilityRate":  1.652 
+},
+{
+ "country": "Finland",
+"iso": "FIN",
+"IncomePerCapita":  33162,
+"CO2.pt": 10.548,
+"Patents.pt": 2.1799,
+"LifeExpectancyAtBirth": 79.699,
+"UrbanPop.pc": 0.83251,
+"TotalFertilityRate":   1.85 
+},
+{
+ "country": "France",
+"iso": "FRA",
+"IncomePerCapita":  30491,
+"CO2.pt": 6.0703,
+"Patents.pt": 0.86017,
+"LifeExpectancyAtBirth": 81.254,
+"UrbanPop.pc": 0.86824,
+"TotalFertilityRate":   1.97 
+},
+{
+ "country": "Germany",
+"iso": "DEU",
+"IncomePerCapita":  33161,
+"CO2.pt": 9.5372,
+"Patents.pt": 0.74147,
+"LifeExpectancyAtBirth":  80.06,
+"UrbanPop.pc": 0.73305,
+"TotalFertilityRate":   1.37 
+},
+{
+ "country": "Greece",
+"iso": "GRC",
+"IncomePerCapita":  27289,
+"CO2.pt": 8.6619,
+"Patents.pt": 1.1721,
+"LifeExpectancyAtBirth": 79.594,
+"UrbanPop.pc": 0.60563,
+"TotalFertilityRate":   1.46 
+},
+{
+ "country": "Hungary",
+"iso": "HUN",
+"IncomePerCapita":  17949,
+"CO2.pt": 5.4529,
+"Patents.pt": 0.1383,
+"LifeExpectancyAtBirth":  73.48,
+"UrbanPop.pc": 0.68035,
+"TotalFertilityRate":   1.34 
+},
+{
+ "country": "Ireland",
+"iso": "IRL",
+"IncomePerCapita":  38237,
+"CO2.pt":  9.971,
+"Patents.pt": 3.2629,
+"LifeExpectancyAtBirth":  79.94,
+"UrbanPop.pc": 0.62356,
+"TotalFertilityRate":   2.09 
+},
+{
+ "country": "Italy",
+"iso": "ITA",
+"IncomePerCapita":  27951,
+"CO2.pt": 7.4689,
+"Patents.pt": 0.5827,
+"LifeExpectancyAtBirth": 81.236,
+"UrbanPop.pc":  0.679,
+"TotalFertilityRate":   1.39 
+},
+{
+ "country": "Latvia",
+"iso": "LVA",
+"IncomePerCapita":  15730,
+"CO2.pt": 3.3418,
+"Patents.pt": 0.72649,
+"LifeExpectancyAtBirth": 72.518,
+"UrbanPop.pc": 0.67677,
+"TotalFertilityRate":   1.42 
+},
+{
+ "country": "Lithuania",
+"iso": "LTU",
+"IncomePerCapita":  17445,
+"CO2.pt": 4.5028,
+"Patents.pt": 0.57087,
+"LifeExpectancyAtBirth":  71.84,
+"UrbanPop.pc": 0.66821,
+"TotalFertilityRate":   1.41 
+},
+{
+ "country": "Luxembourg",
+"iso": "LUX",
+"IncomePerCapita":  75194,
+"CO2.pt": 21.897,
+"Patents.pt": 25.013,
+"LifeExpectancyAtBirth": 79.563,
+"UrbanPop.pc": 0.85008,
+"TotalFertilityRate":   1.62 
+},
+{
+ "country": "Malta",
+"iso": "MLT",
+"IncomePerCapita":  22318,
+"CO2.pt": 6.1828,
+"Patents.pt": 0.30197,
+"LifeExpectancyAtBirth": 78.951,
+"UrbanPop.pc": 0.93806,
+"TotalFertilityRate":   1.31 
+},
+{
+ "country": "Netherlands",
+"iso": "NLD",
+"IncomePerCapita":  37692,
+"CO2.pt": 10.533,
+"Patents.pt": 1.6652,
+"LifeExpectancyAtBirth": 80.024,
+"UrbanPop.pc": 0.81431,
+"TotalFertilityRate":  1.744 
+},
+{
+ "country": "Poland",
+"iso": "POL",
+"IncomePerCapita":  16181,
+"CO2.pt":  8.269,
+"Patents.pt": 0.059422,
+"LifeExpectancyAtBirth": 75.678,
+"UrbanPop.pc": 0.61001,
+"TotalFertilityRate":   1.32 
+},
+{
+ "country": "Portugal",
+"iso": "PRT",
+"IncomePerCapita":  20601,
+"CO2.pt": 5.4869,
+"Patents.pt": 1.3014,
+"LifeExpectancyAtBirth": 78.771,
+"UrbanPop.pc": 0.59266,
+"TotalFertilityRate":   1.36 
+},
+{
+ "country": "Romania",
+"iso": "ROU",
+"IncomePerCapita":  11591,
+"CO2.pt": 4.3891,
+"Patents.pt": 0.10917,
+"LifeExpectancyAtBirth": 73.275,
+"UrbanPop.pc": 0.52594,
+"TotalFertilityRate":   1.34 
+},
+{
+ "country": "Slovakia",
+"iso": "SVK",
+"IncomePerCapita":  20020,
+"CO2.pt": 6.9017,
+"Patents.pt": 0.14757,
+"LifeExpectancyAtBirth":  74.88,
+"UrbanPop.pc": 0.54774,
+"TotalFertilityRate":   1.27 
+},
+{
+ "country": "Slovenia",
+"iso": "SVN",
+"IncomePerCapita":  26833,
+"CO2.pt": 8.5009,
+"Patents.pt": 1.3884,
+"LifeExpectancyAtBirth": 78.414,
+"UrbanPop.pc": 0.50241,
+"TotalFertilityRate":   1.39 
+},
+{
+ "country": "Spain",
+"iso": "ESP",
+"IncomePerCapita":  28161,
+"CO2.pt": 7.2931,
+"Patents.pt": 0.58977,
+"LifeExpectancyAtBirth": 80.935,
+"UrbanPop.pc": 0.7775,
+"TotalFertilityRate":   1.42 
+},
+{
+ "country": "Sweden",
+"iso": "SWE",
+"IncomePerCapita":  33527,
+"CO2.pt": 5.3157,
+"Patents.pt": 2.6574,
+"LifeExpectancyAtBirth": 80.973,
+"UrbanPop.pc": 0.84603,
+"TotalFertilityRate":  1.917 
+},
+{
+ "country": "United Kingdom",
+"iso": "GBR",
+"IncomePerCapita":  32544,
+"CO2.pt": 8.5229,
+"Patents.pt": 0.85838,
+"LifeExpectancyAtBirth": 79.499,
+"UrbanPop.pc": 0.79467,
+"TotalFertilityRate":   1.83 
+} 
+],
+"var.info": {
+ "IncomePerCapita": {
+ "info": "2008 Gross Domestic Product per capita by Purchasing Power Parities (in international dollars, fixed 2005 prices).",
+"source": "http://www.gapminder.org/downloads/documentation/gd001",
+"format": "" 
+},
+"CO2.pt": {
+ "info": "CO2 emissions (metric tons of CO2) per 1,000 people.",
+"source": "http://cdiac.ornl.gov/trends/emis/meth_reg.html",
+"format": "" 
+},
+"Patents.pt": {
+ "info": "Patents granted (per 1,000 people)",
+"source": "http://data.un.org/wiki/CDB.ashx",
+"format": "" 
+},
+"LifeExpectancyAtBirth": {
+ "info": "Life expectancy at birth (years, 2008)",
+"source": "http://www.gapminder.org/gapminder-world/documentation/gd004",
+"format": "" 
+},
+"UrbanPop": {
+ "info": "Urban population\t(prop. of total, 2008)",
+"source": "http://data.worldbank.org/indicator/SP.URB.TOTL",
+"format": "" 
+},
+"TotalFertilityRate": {
+ "info": "Children per woman (2008)",
+"source": "http://www.gapminder.org/downloads/documentation/gd008",
+"format": "" 
+} 
+} 
+}

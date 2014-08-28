@@ -1,0 +1,161 @@
+require(datamart)
+require(plyr)
+require(stringr)
+library(rworldmap)
+
+get.raw <- function()
+  {
+
+    gm <- gapminder()
+    var.get <- c("Population","TotalFertilityRate","IncomePerCapita","LifeExpectancyAtBirth","CO2Emissions","UrbanPopulation","PersonalComputers","PatentsGranted")
+    rawdat <- llply(var.get,function(v) query(gm,v),.progress="text")
+    names(rawdat) <- var.get
+    cleanup.raw(rawdat)
+  }
+
+#Make sure the names of the countries are consistent
+cleanup.raw <- function(rawdat)
+  {
+    lapply(rawdat,function(r)
+           {
+             ind.cz <- str_detect(attr(r,"dimnames")[[2]],"Cze.*Re")
+             attr(r,"dimnames")[[2]][ind.cz] <- "Czech Republic"
+             ind.sl <- str_detect(attr(r,"dimnames")[[2]],"Slova.*")
+             attr(r,"dimnames")[[2]][ind.sl] <- "Slovakia"
+             r
+           })
+  }
+
+
+eu.countries <- c("Austria" ,
+"Belgium" ,
+"Bulgaria" ,
+"Cyprus" ,
+"Czech Republic" ,
+"Denmark" ,
+"Estonia" ,
+"Finland" ,
+"France" ,
+"Germany" ,
+"Greece" ,
+"Hungary" ,
+"Ireland" ,
+"Italy",
+"Latvia",
+"Lithuania",
+"Luxembourg",
+"Malta",
+"Netherlands",
+"Poland",
+"Portugal",
+"Romania",
+"Slovakia",
+"Slovenia",
+"Spain",
+"Sweden",
+"United Kingdom")
+
+extract.eu <- function(rawdat)
+  {
+    gpcountries <- attr(rawdat[[1]],"dimnames")[[2]]
+    gpcountries <- gsub("Slovakia Republic","Slovakia",gpcountries)
+    euind <- which(gpcountries %in% eu.countries)
+    llply(rawdat,function(r)
+          {
+            gpcountries <- attr(r,"dimnames")[[2]]
+#            gpcountries <- gsub("Slovakia Republic","Slovakia",gpcountries)
+            euind <- which(gpcountries %in% eu.countries)
+            r[,euind]
+          }
+          )
+  }
+
+extract.df <- function(eudat)
+  {
+#    ldply(names(eudat),function(stat)
+    df <- data.frame(country=eu.countries)
+    for (stat in names(eudat))
+      {
+        if (stat == "PersonalComputers")
+          {
+            year = '2006'
+          }
+        else if (stat == "WorkingHoursPerWeek")
+          {
+            year = '2007'
+          }
+        else if (stat == "PatentsGranted")
+          {
+            year = '2002'
+          }
+        else
+          {
+            year = '2008'
+          }
+        val <- eudat[[stat]][year]
+        countries <- attr(eudat[[stat]],"dimnames")[[2]]
+        tmp <- data.frame(country=countries)
+        tmp[,stat] <- a.n(val)
+        df <- merge(df,tmp)
+      }#
+    df
+  }
+
+prepare.data <- function(df)
+  {
+    #A bunch of indicators are more useful on a per capita basis
+    df <- mutate(df,
+                 CO2.pc = CO2Emissions/Population,
+                 CO2.pt = CO2.pc*1000,
+                 UrbanPop.pc = UrbanPopulation/Population,
+                 Patents.pc =  PatentsGranted/Population,
+                 Patents.pt =  Patents.pc*1000,
+                 logCO2.pc = log(CO2.pc),
+                 logPatents.pc= log(Patents.pc),
+                 logIncome= log(IncomePerCapita),
+                 logFrate=log(TotalFertilityRate),
+                 logLE=log(LifeExpectancyAtBirth),
+                 logUPop.pc=log(UrbanPop.pc))
+    #Get ISO codes
+    
+    df$iso <- sapply(df$country,rwmGetISO3)
+    
+    df
+  }
+
+#Compute a distance matrix between countries. weight.econ is the weight given to economic variables.
+compute.dmat <- function(df,weight.econ=0)
+  {
+    vars.econ <- c('logPatents.pc','logIncome','logCO2.pc')
+    vars.dem <- c('logFrate','logUPop.pc','logLE')
+    E <- scale(df[,vars.econ])
+    D <- scale(df[,vars.dem])
+    weight.econ*as.matrix(dist(E))+(1-weight.econ)*as.matrix(dist(D))
+  }
+
+load_data <- function()
+  {
+    rawdat <- get.raw() #Get data from online repository
+    eudat <- extract.eu(rawdat) #Extract EU data
+    df <- prepare.data(extract.df(eudat)) #Do some processing
+  }
+
+compute.dmat <- function(df, weight.econ = 0){
+  vars.econ <- c('logPatents.pc','logIncome','logCO2.pc')
+  vars.dem <- c('logFrate','logUPop.pc','logLE')
+  E <- scale(df[,vars.econ])
+  D <- scale(df[,vars.dem])
+  D.econ <- a.m(dist(E))
+  D.demo <- a.m(dist(D))
+  list(D.econ = D.econ, D.demo = D.demo)
+  }
+
+compute.weighted <- function(df, w, convex = TRUE){
+  weight.econ*as.matrix(dist(E))+(1-weight.econ)*as.matrix(dist(D))
+  
+compute.Dlist <- function(D,T)
+    econ.weight <- seq(0,1,l=T)
+    Dist <- llply(econ.weight,function(w) compute.dmat(df,w))
+    embed <- compute.cmds(df) #Compute embedding
+    #    export.d3(df,embed)
+    list(df=df,embed=embed)

@@ -35,7 +35,7 @@ shinyUI(fluidPage(
             
             mainPanel(
               h3("cMDS embedding"),
-              plotOutput("plot"),
+              htmlOutput("plot"),
               br(),
               p("The total cost of the embedding:"),
               verbatimTextOutput("text"),

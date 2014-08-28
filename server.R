@@ -4,6 +4,7 @@ require(plyr)
 require(stringr)
 library(rworldmap)
 library(cmdsr)
+library(googleVis)
 
 source("helpers.R")
 
@@ -13,7 +14,7 @@ Ds <- compute.dmat(info.df)
 shinyServer(function(input, output) {
 
   dataInput <- reactive({
-    DistL <- compute.Dlist(Ds, T = input$bins, convex = input$convex)
+    DistL <- compute.Dlist(Ds, T = input$bins+1, convex = input$convex)
     return(DistL)
   })
 
@@ -24,6 +25,8 @@ shinyServer(function(input, output) {
 
   embed <- reactive({
     embed <- make.df(res(),info.df)
+    embed <- mutate(embed, time = alpha*(input$bins + 1))
+    return(embed)
     })
 
   limits <- reactive({
@@ -33,9 +36,9 @@ shinyServer(function(input, output) {
   alpha <- reactive({
     compute.alpha(input$bins,input$alpha)
   })
-  
-  output$plot <- renderPlot({   
-    plot.timestep(embed(),alpha(),limits())
+
+  output$plot <- renderGvis({
+    gvisMotionChart(subset(embed(),select = c("iso","time","cmds.x1","cmds.x2")), idvar = "iso", timevar = "time", xvar = "cmds.x1", yvar = "cmds.x2", options = list(showSidePanel = FALSE))
   })
 
   output$text <- renderPrint({

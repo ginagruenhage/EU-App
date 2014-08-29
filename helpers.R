@@ -58,7 +58,7 @@ compute.alpha <- function(bins,a){
   alpha
   }
 
-  mycols = c(rgb(31,119, 180,max=255), rgb( 255,127,14,max=255), rgb( 44, 160, 44,max=255),rgb(214, 39,40,max=255),rgb(148,103,189,max=255),rgb( 140,86,75,max=255),rgb(227,119,194,max=255),rgb(127,127,127,max=255),rgb( 188,189,34,max=255),rgb(23,190,207,max=255))
+mycols = c(rgb(31,119, 180,max=255), rgb( 255,127,14,max=255), rgb( 44, 160, 44,max=255),rgb(214, 39,40,max=255),rgb(148,103,189,max=255),rgb( 140,86,75,max=255),rgb(227,119,194,max=255),rgb(127,127,127,max=255),rgb( 188,189,34,max=255),rgb(23,190,207,max=255))
 
 theme_cmds_2d <- theme_classic() + theme(  axis.line = element_blank(),panel.border = element_rect(linetype = "solid",fill=NA, colour = "black"),legend.position="bottom",legend.key=element_rect(fill="white",colour="white"),legend.margin = unit(0,"cm"),plot.margin=unit(c(0,0,0,0),"cm"),strip.background=element_blank(),strip.text.x=element_blank()) 
 
@@ -74,16 +74,23 @@ plot.timestep <- function(embed,a,limits){
   print(p)
   }
 
+all_values <- function(x){
+  if (is.null(x)) return(NULL)
+  row <- embed[embed$iso == x$iso,]
+  row <- row[1, c("iso","country","IncomePerCapita","CO2.pc","Patents.pc","LifeExpectancyAtBirth","UrbanPop.pc","TotalFertilityRate")]
+  paste0(names(row), ": ", format(row), collapse = "<br />")
+  
+  }
+
 
 plot.timestep.ggvis <- function(embed,a,limits){
   nf <- subset(embed, iso %in% c("NLD","FIN") & alpha < a + 1e-5 & alpha > a - 1e-5)
   be <- subset(embed, iso %in% c("BGR","EST") & alpha < a + 1e-5 & alpha > a - 1e-5)
-  subset(embed, alpha < a + 1e-5 & alpha > a - 1e-5) %>%
-    ggvis(~cmds.x1, ~cmds.x2) %>%
-      layer_points(size := 5, fill := mycols[1])
-  #geom_point(alpha = 0.3,size = 5, color = mycols[1]) + theme_cmds_2d + xlim(limits$x) + ylim(limits$y)
+  sub.df <- subset(embed, alpha < a + 1e-5 & alpha > a - 1e-5)
+    sub.df %>% ggvis(x = ~cmds.x1,y=  ~cmds.x2, key := ~iso ) %>%
+      layer_points(size := 50, fill := mycols[1], fillOpacity := 0.8) %>%
+        scale_numeric("x", domain = limits$x, nice = TRUE) %>%
+          scale_numeric("y", domain = limits$y, nice = TRUE) %>%
+            add_tooltip(all_values,"hover")
   
-  #p <- p + geom_point(size=5,color=mycols[4],data=nf) + geom_text(data=nf,aes(x=(cmds.x1-0.2),y=cmds.x2,label=iso),size=5,color=mycols[4],hjust=1)
-  #p <- p + geom_point(size=5,color=mycols[3],data=be) + geom_text(data=be,aes(x=(cmds.x1-0.2),y=cmds.x2,label=iso),size=5,color=mycols[3],hjust=1)
-  print(p)
   }

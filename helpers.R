@@ -79,6 +79,10 @@ plot.timestep <- function(embed,a,limits){
   sub.df <- subset(embed, alpha < a + 1e-5 & alpha > a - 1e-5)
     sub.df %>% ggvis(x = ~cmds.x1,y=  ~cmds.x2, key := ~iso ) %>%
       layer_points(size := 50, fill := mycols[1], fillOpacity := 0.8) %>%
+        layer_points(size := 50, fill := mycols[4], data = nf ) %>%
+          layer_text(dx := 5, dy := 0, text := ~iso, data = nf) %>%
+            layer_text(dx := 5, text := ~iso, data = be) %>%
+          layer_points(size := 50, fill := mycols[3], data = be ) %>%
         scale_numeric("x", domain = limits$x, nice = TRUE) %>%
           scale_numeric("y", domain = limits$y, nice = TRUE) %>%
             add_tooltip(all_values,"hover")

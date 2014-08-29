@@ -64,15 +64,6 @@ theme_cmds_2d <- theme_classic() + theme(  axis.line = element_blank(),panel.bor
 
 theme_cmds_1d <- theme_classic() + theme( text = element_text(,size=10), axis.line = element_blank(), panel.border = element_rect(linetype = "solid", fill=NA, colour = "black"), plot.margin=unit(c(0,0,0,0),"cm"))
                  
-plot.timestep <- function(embed,a,limits){
-  nf <- subset(embed, iso %in% c("NLD","FIN") & alpha < a + 1e-5 & alpha > a - 1e-5)
-  be <- subset(embed, iso %in% c("BGR","EST") & alpha < a + 1e-5 & alpha > a - 1e-5)
-  #p <- ggplot(subset(embed, alpha < a + 1e-5 & alpha > a - 1e-5), aes(x=cmds.x1, y=cmds.x2)) + geom_point(alpha = 0.3,size = 5, color = mycols[1]) + theme_cmds_2d + xlim(limits$x) + ylim(limits$y)
-  p <- ggplot(embed, aes(x=cmds.x1, y=cmds.x2)) + geom_point(alpha = 0.3,size = 5, color = mycols[1]) + theme_cmds_2d + xlim(limits$x) + ylim(limits$y)
-  p <- p + geom_point(size=5,color=mycols[4],data=nf) + geom_text(data=nf,aes(x=(cmds.x1-0.2),y=cmds.x2,label=iso),size=5,color=mycols[4],hjust=1)
-  p <- p + geom_point(size=5,color=mycols[3],data=be) + geom_text(data=be,aes(x=(cmds.x1-0.2),y=cmds.x2,label=iso),size=5,color=mycols[3],hjust=1)
-  print(p)
-  }
 
 all_values <- function(x){
   if (is.null(x)) return(NULL)
@@ -82,8 +73,7 @@ all_values <- function(x){
   
   }
 
-
-plot.timestep.ggvis <- function(embed,a,limits){
+plot.timestep <- function(embed,a,limits){
   nf <- subset(embed, iso %in% c("NLD","FIN") & alpha < a + 1e-5 & alpha > a - 1e-5)
   be <- subset(embed, iso %in% c("BGR","EST") & alpha < a + 1e-5 & alpha > a - 1e-5)
   sub.df <- subset(embed, alpha < a + 1e-5 & alpha > a - 1e-5)

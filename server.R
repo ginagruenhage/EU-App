@@ -35,29 +35,11 @@ shinyServer(function(input, output) {
     compute.alpha(input$bins,input$alpha)
   })
   
-  ## dataInput <- reactive(function(){
-  ##   #x <- subset(embed(), alpha < alpha.val() + 1e-5 & alpha > alpha.val() - 1e-5)
-  ##   x <- embed()
-  ##   x <- x[,select = c("cmds.x1","cmds.x2","alpha","iso")]
-  ##   names(x) <- c("x","y","timevar","idvar")
-  ##   x
-  ## })
-
-  ## vis <- reactive({
-  ##   embed() %>% ggvis(~cmds.x1, ~cmds.x2, size = 5) %>% layer_points() 
-  ## })
   vis <- reactive({
-    plot.timestep.ggvis(embed(),alpha.val(),limits())
+    plot.timestep(embed(),alpha.val(),limits())
   })
   vis %>% bind_shiny("myplot",controls_id="myplot_ui")
-  ## gv <- reactive({
-  ##   dataInput() %>% ggvis(~cmds.x1, ~cmds.x2, size = 5) %>%
-  ##   layer_points()
-  ##   })
-
-  #output$controls <- renderControls(gv)
-  #ovserve_ggvis(gv,"my_plot",session)
-                  
+                    
   output$text <- renderPrint({
     print(summary.cmds(res())$Error)
   })

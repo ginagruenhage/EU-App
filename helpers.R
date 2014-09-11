@@ -40,8 +40,11 @@ make.df <- function(res,info.df){
     df[,"id"] <- ids
     df
     })
+  pen.df <- summary.cmds(res)$PenaltiesPerCurve
+  names(pen.df) <- c("id","penalty")
   if (!missing(info.df)){
     embed <- merge(embed,info.df)
+    embed <- merge(embed,pen.df)
   }
 }
 
@@ -58,7 +61,7 @@ compute.alpha <- function(bins,a){
   alpha
   }
 
-mycols = c(rgb(31,119, 180,max=255), rgb( 255,127,14,max=255), rgb( 44, 160, 44,max=255),rgb(214, 39,40,max=255),rgb(148,103,189,max=255),rgb( 140,86,75,max=255),rgb(227,119,194,max=255),rgb(127,127,127,max=255),rgb( 188,189,34,max=255),rgb(23,190,207,max=255))
+mycols = c(rgb(31,119, 180,max=255), rgb( 255,127,14,max=255), rgb( 44, 160, 44,max=255),rgb(214, 39,40,max=255),rgb(148,103,189,max=255),rgb( 140,86,75,max=255),rgb(227,119,194,max=255),rgb(127,127,127,max=255),rgb( 188,189,34,max=255),rgb(23,190,207,max=255)) 
 
 theme_cmds_2d <- theme_classic() + theme(  axis.line = element_blank(),panel.border = element_rect(linetype = "solid",fill=NA, colour = "black"),legend.position="bottom",legend.key=element_rect(fill="white",colour="white"),legend.margin = unit(0,"cm"),plot.margin=unit(c(0,0,0,0),"cm"),strip.background=element_blank(),strip.text.x=element_blank()) 
 
@@ -73,18 +76,31 @@ all_values <- function(x){
   
   }
 
-plot.timestep <- function(embed,a,limits){
+plot.timestep <- function(embed,a,limits,check.pen){
   nf <- subset(embed, iso %in% c("NLD","FIN") & alpha < a + 1e-5 & alpha > a - 1e-5)
   be <- subset(embed, iso %in% c("BGR","EST") & alpha < a + 1e-5 & alpha > a - 1e-5)
   sub.df <- subset(embed, alpha < a + 1e-5 & alpha > a - 1e-5)
-    sub.df %>% ggvis(x = ~cmds.x1,y=  ~cmds.x2, key := ~iso ) %>%
-      layer_points(size := 50, fill := mycols[1], fillOpacity := 0.8) %>%
-        layer_points(size := 50, fill := mycols[4], data = nf ) %>%
-          layer_text(dx := 5, dy := 0, text := ~iso, data = nf) %>%
-            layer_text(dx := 5, text := ~iso, data = be) %>%
-          layer_points(size := 50, fill := mycols[3], data = be ) %>%
+  if (check.pen){
+    sub.df %>%
+      ggvis(x = ~cmds.x1, y =  ~cmds.x2, fill = ~penalty, key := ~iso ) %>%
+        layer_points(size := 50, stroke := "#081d58") %>%
+          layer_text(dx := 5, dy := 0, text := ~iso, fill := "black", data = nf) %>%
+              layer_text(dx := 5, text := ~iso, fill := "black", data = be) %>%
+                scale_numeric("x", domain = limits$x, nice = TRUE) %>%
+                  scale_numeric("y", domain = limits$y, nice = TRUE) %>%
+                    scale_numeric("fill",range = c("#ffffd9","#081d58")) %>%
+    add_legend("fill",title = "Penalty per Curve") %>%
+    add_tooltip(all_values,"hover")
+  } else {
+    sub.df %>%
+      ggvis(x = ~cmds.x1, y =  ~cmds.x2, key := ~iso ) %>%
+        layer_points(size := 50, fill := mycols[1], fillOpacity := 0.8) %>%
+          layer_points(size := 50, fill := mycols[4], data = nf ) %>%
+            layer_text(dx := 5, dy := 0, text := ~iso, data = nf) %>%
+              layer_text(dx := 5, text := ~iso, data = be) %>%
+                layer_points(size := 50, fill := mycols[3], data = be ) %>%
         scale_numeric("x", domain = limits$x, nice = TRUE) %>%
           scale_numeric("y", domain = limits$y, nice = TRUE) %>%
             add_tooltip(all_values,"hover")
-  
   }
+}

@@ -25,12 +25,18 @@ shinyUI(fluidPage(
               
               checkboxInput("convex", label = "Convex Weighting", value = FALSE),
 
+              #actionButton("goButon","Go!"),
+
               br(),
               hr(),
 
               helpText("Choose the weight for which you want to plot the embedding:"),
 
-              sliderInput("alpha", "Economic weight:", min = 0, max = 1, value = 0)
+              sliderInput("alpha", "Economic weight:", min = 0, max = 1, value = 0),
+
+              helpText("Do you want to color according to the smoothness penalty?"),
+
+              checkboxInput("check.pen", label = "Coloring: Penalty per Curve", value = FALSE)
               ),
             
             mainPanel(

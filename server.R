@@ -36,12 +36,13 @@ shinyServer(function(input, output) {
   })
   
   vis <- reactive({
-    plot.timestep(embed(),alpha.val(),limits())
+    plot.timestep(embed(),alpha.val(),limits(),input$check.pen)
   })
   vis %>% bind_shiny("myplot",controls_id="myplot_ui")
                     
   output$text <- renderPrint({
-    print(summary.cmds(res())$Error)
+    #print(summary.cmds(res()))
+    print(summary.cmds(res())$Error)    
   })
 
   

@@ -4,9 +4,12 @@ require(plyr)
 require(stringr)
 library(rworldmap)
 library(cmdsr)
-library(ggvis)
+require(ggvis)
+require(ggplot2)
 
 source("helpers.R")
+
+
 
 info.df <- read.table("data/df.csv")
 Ds <- compute.dmat(info.df)

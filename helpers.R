@@ -68,15 +68,18 @@ theme_cmds_2d <- theme_classic() + theme(  axis.line = element_blank(),panel.bor
 theme_cmds_1d <- theme_classic() + theme( text = element_text(,size=10), axis.line = element_blank(), panel.border = element_rect(linetype = "solid", fill=NA, colour = "black"), plot.margin=unit(c(0,0,0,0),"cm"))
                  
 
-all_values <- function(x){
-  if (is.null(x)) return(NULL)
-  row <- embed[embed$iso == x$iso,]
-  row <- row[1, c("iso","country","IncomePerCapita","CO2.pc","Patents.pc","LifeExpectancyAtBirth","UrbanPop.pc","TotalFertilityRate")]
-  paste0(names(row), ": ", format(row), collapse = "<br />")
-  
-  }
+
 
 plot.timestep <- function(embed,a,limits,check.pen){
+
+  all_values <- function(x){
+  if (is.null(x)) return(NULL)
+  
+  row <- embed[embed$iso == x$iso,]
+  row <- row[1, c("iso","country","IncomePerCapita","CO2.pc","Patents.pc","LifeExpectancyAtBirth","UrbanPop.pc","TotalFertilityRate")]
+  paste0(names(row), ": ", format(row), collapse = "<br />")  
+  }
+  
   nf <- subset(embed, iso %in% c("NLD","FIN") & alpha < a + 1e-5 & alpha > a - 1e-5)
   be <- subset(embed, iso %in% c("BGR","EST") & alpha < a + 1e-5 & alpha > a - 1e-5)
   sub.df <- subset(embed, alpha < a + 1e-5 & alpha > a - 1e-5)
